@@ -210,8 +210,6 @@ Command6.Enabled = True
 Command7.Enabled = True
 Command2.Enabled = False
 Command3.Enabled = False
-Command1.Visible = False
-Command8.Visible = False
 End Sub
 
 Private Sub Command2_Click()
@@ -243,7 +241,7 @@ Command1.Visible = True
 Command8.Visible = True
 Command2.Enabled = True
 Command3.Enabled = True
-
+Data1.Recordset.Update
 i = 2
 End Sub
 
@@ -260,6 +258,15 @@ i = 3
 End Sub
 
 Private Sub Command8_Click()
+If i = 1 Then
+Data1.Recordset.Cancel
+Else
+If i = 2 Then
+Data1.Recordset.CancelUpdate
+Else
+Data1.Recordset.Cancel
+End If
+End If
 Frame1.Enabled = False
 Command1.Enabled = False
 Command8.Enabled = False
@@ -267,10 +274,4 @@ Command6.Enabled = True
 Command7.Enabled = True
 Command2.Enabled = False
 Command3.Enabled = False
-Command1.Visible = False
-Command8.Visible = False
-End Sub
-
-Private Sub Form_Load()
-
 End Sub
