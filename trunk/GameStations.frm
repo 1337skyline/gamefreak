@@ -750,7 +750,7 @@ Combo1.AddItem Data2.Recordset(0)
 Data2.Recordset.MoveNext
 Loop
 For i = 1 To 20
-
+Next
 End Sub
 
 
