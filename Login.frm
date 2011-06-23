@@ -43,7 +43,6 @@ Begin VB.Form Login1
       Height          =   390
       Left            =   1680
       MaskColor       =   &H00FFFFFF&
-      RightToLeft     =   -1  'True
       Style           =   1  'Graphical
       TabIndex        =   5
       Top             =   7200
@@ -108,7 +107,7 @@ Private Sub cmdOK_Click()
         LoginProcess.Caption = "Success"
         LoginProcess.ForeColor = &HC000&
         Me.Hide
-        Main.Show
+        MainMenu.Show
     Else
         LoginProcess.Caption = "Incorrect UserName/Paaword, Please try again."
         LoginProcess.ForeColor = &HFF&
