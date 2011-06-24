@@ -168,13 +168,13 @@ Begin VB.Form Coupons
    End
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
       Bindings        =   "Coupons.frx":E5C5
-      Height          =   4215
-      Left            =   2520
+      Height          =   4815
+      Left            =   1440
       TabIndex        =   0
       Top             =   3120
-      Width           =   7695
-      _ExtentX        =   13573
-      _ExtentY        =   7435
+      Width           =   9975
+      _ExtentX        =   17595
+      _ExtentY        =   8493
       _Version        =   393216
    End
    Begin VB.Image Image1 
