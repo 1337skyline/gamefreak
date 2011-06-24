@@ -15,6 +15,22 @@ Begin VB.Form TechShed
    ScaleHeight     =   9120
    ScaleWidth      =   12900
    ShowInTaskbar   =   0   'False
+   Begin VB.Data Data3 
+      Caption         =   "Data3"
+      Connect         =   "Access 2000;"
+      DatabaseName    =   "Access\GameFreakDB.mdb"
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   375
+      Left            =   120
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   "GameStations"
+      Top             =   8400
+      Width           =   1740
+   End
    Begin VB.CommandButton Command10 
       Caption         =   "Done"
       Height          =   375
@@ -40,6 +56,7 @@ Begin VB.Form TechShed
       Top             =   1200
       Width           =   5535
       Begin VB.TextBox Text10 
+         DataField       =   "FirstName"
          DataSource      =   "Data2"
          Enabled         =   0   'False
          Height          =   285
@@ -50,6 +67,7 @@ Begin VB.Form TechShed
          Width           =   1335
       End
       Begin VB.TextBox Text9 
+         DataField       =   "Address"
          DataSource      =   "Data2"
          Enabled         =   0   'False
          Height          =   285
@@ -60,6 +78,7 @@ Begin VB.Form TechShed
          Width           =   1335
       End
       Begin VB.TextBox Text8 
+         DataField       =   "LastName"
          DataSource      =   "Data2"
          Enabled         =   0   'False
          Height          =   285
@@ -70,6 +89,7 @@ Begin VB.Form TechShed
          Width           =   1695
       End
       Begin VB.TextBox Text7 
+         DataField       =   "Phone"
          DataSource      =   "Data2"
          Enabled         =   0   'False
          Height          =   285
@@ -80,6 +100,7 @@ Begin VB.Form TechShed
          Width           =   1695
       End
       Begin VB.TextBox Text6 
+         DataField       =   "TechCode"
          DataSource      =   "Data2"
          Enabled         =   0   'False
          Height          =   285
@@ -92,6 +113,7 @@ Begin VB.Form TechShed
       Begin VB.CheckBox Check2 
          BackColor       =   &H00FFFFFF&
          Caption         =   "Check1"
+         DataField       =   "Active"
          DataSource      =   "Data2"
          Enabled         =   0   'False
          Height          =   255
@@ -131,7 +153,7 @@ Begin VB.Form TechShed
          Left            =   2880
          TabIndex        =   24
          Top             =   720
-         Width           =   735
+         Width           =   855
       End
       Begin VB.Label Label11 
          BackColor       =   &H00FFFFFF&
@@ -176,6 +198,8 @@ Begin VB.Form TechShed
       Top             =   1320
       Width           =   3615
       Begin VB.ComboBox Combo1 
+         DataField       =   "Station"
+         DataSource      =   "Data3"
          Height          =   315
          Left            =   1560
          TabIndex        =   11
@@ -184,6 +208,8 @@ Begin VB.Form TechShed
          Width           =   1815
       End
       Begin VB.ComboBox Combo2 
+         DataField       =   "TechCode"
+         DataSource      =   "Data2"
          Height          =   315
          Left            =   1560
          TabIndex        =   10
@@ -222,7 +248,7 @@ Begin VB.Form TechShed
       Options         =   0
       ReadOnly        =   0   'False
       RecordsetType   =   1  'Dynaset
-      RecordSource    =   "Suppliers"
+      RecordSource    =   "Technicians"
       Top             =   8520
       Visible         =   0   'False
       Width           =   1815
@@ -298,12 +324,14 @@ Begin VB.Form TechShed
       Options         =   0
       ReadOnly        =   0   'False
       RecordsetType   =   1  'Dynaset
-      RecordSource    =   "Orders"
+      RecordSource    =   "TechOrders"
       Top             =   8520
       Visible         =   0   'False
       Width           =   1815
    End
    Begin MSACAL.Calendar Calendar1 
+      DataField       =   "ArriveDate"
+      DataSource      =   "Data1"
       Height          =   2295
       Left            =   720
       TabIndex        =   1
@@ -392,22 +420,117 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub Command1_Click()
+Frame1.Enabled = True
+Command2.Visible = False
+Command5.Enabled = False
+Command6.Enabled = False
+Command8.Enabled = False
+Command10.Enabled = False
+Data1.Recordset.AddNew
+i = 1
+End Sub
+
+Private Sub Command10_Click()
+If i = 1 Then
+Data2.Recordset.Update
+Else
+Data2.Recordset.Update
+
+Frame1.Enabled = False
+Command1.Enabled = True
+Command2.Enabled = True
+Command4.Enabled = True
+Command9.Enabled = True
+Command5.Enabled = True
+Command6.Enabled = True
+Command8.Enabled = True
+Command10.Enabled = True
+End Sub
+
 Private Sub Command2_Click()
 Frame1.Enabled = True
+Command1.Visible = False
+Command5.Enabled = False
+Command6.Enabled = False
+Command8.Enabled = False
+Command10.Enabled = False
+Data1.Recordset.Edit
+i = 2
 End Sub
 
 Private Sub Command3_Click()
 Frame1.Enabled = True
 End Sub
 
+Private Sub Command4_Click()
+If i = 1 Then
+Data1.Recordset.Cancel
+Else
+Data1.Recordset.CancelUpdate
+
+Frame1.Enabled = False
+Command1.Enabled = True
+Command2.Enabled = True
+Command4.Enabled = True
+Command9.Enabled = True
+Command5.Enabled = True
+Command6.Enabled = True
+Command8.Enabled = True
+Command10.Enabled = True
+End Sub
+
 Private Sub Command5_Click()
-Frame1.Enabled = True
+Frame2.Enabled = True
+Command1.Enabled = False
+Command2.Enabled = False
+Command9.Enabled = False
+Command4.Enabled = False
+Command6.Visible = False
+Data2.Recordset.AddNew
+i = 1
 End Sub
 
 Private Sub Command6_Click()
-Frame1.Enabled = True
+Frame2.Enabled = True
+Command1.Enabled = False
+Command2.Enabled = False
+Command9.Enabled = False
+Command4.Enabled = False
+Command5.Visible = False
+Data2.Recordset.Edit
+i = 2
+End Sub
+Private Sub Command8_Click()
+If i = 1 Then
+Data2.Recordset.Cancel
+Else
+Data2.Recordset.CancelUpdate
+
+Frame1.Enabled = False
+Command1.Enabled = True
+Command2.Enabled = True
+Command4.Enabled = True
+Command9.Enabled = True
+Command5.Enabled = True
+Command6.Enabled = True
+Command8.Enabled = True
+Command10.Enabled = True
 End Sub
 
-Private Sub Command7_Click()
-Frame1.Enabled = True
+Private Sub Command9_Click()
+If i = 1 Then
+Data1.Recordset.Update
+Else
+Data1.Recordset.Update
+
+Frame1.Enabled = False
+Command1.Enabled = True
+Command2.Enabled = True
+Command4.Enabled = True
+Command9.Enabled = True
+Command5.Enabled = True
+Command6.Enabled = True
+Command8.Enabled = True
+Command10.Enabled = True
 End Sub
